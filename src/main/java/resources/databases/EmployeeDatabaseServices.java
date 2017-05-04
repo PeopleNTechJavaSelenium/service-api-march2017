@@ -77,7 +77,7 @@ public class EmployeeDatabaseServices {
             iterable.forEach(new Block<Document>() {
                 @Override
                 public void apply(final Document document) {
-                    ObjectId idDocument = (ObjectId)document.get("id");
+                    ObjectId idDocument = (ObjectId)document.get("_id");
                     Document empInfoDocument = (Document) document.get("empInfo");
                     String dbID = idDocument.toString();
                     String empEmail = (String)empInfoDocument.get("empEmail");
