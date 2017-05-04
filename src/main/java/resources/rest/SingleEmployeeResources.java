@@ -20,9 +20,10 @@ public class SingleEmployeeResources {
         EmployeeDatabaseServices employeeDatabaseServices = new EmployeeDatabaseServices();
 
         @GET
+        @Path("/{empId}")
         @Produces(MediaType.APPLICATION_JSON)
-        public List<EmployeeProfile> getCompanyList() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
-            return employeeDatabaseServices.queryListOfEmployee();
+        public List<EmployeeProfile> getCompanyList(@PathParam("empId") String empId) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+            return employeeDatabaseServices.queryListOfEmployeeByID(empId);
         }
 
         @POST
@@ -32,6 +33,24 @@ public class SingleEmployeeResources {
             System.out.println("POST Request has come to post to Insert an Emp profile");
             boolean postMessage = employeeDatabaseServices.insertVCProfileNReturn(profile);
             return postMessage;
+
+        }
+
+        @PUT
+        @Path("/{empId}")
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Produces(MediaType.APPLICATION_JSON)
+        public boolean updateOrganizationProfile(EmployeeProfile profile) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+            boolean postMessage = employeeDatabaseServices.updateEmpProfileByIDNReturn(profile);
+            return postMessage;
+        }
+
+        @DELETE
+        @Path("/{vcId}")
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Produces(MediaType.APPLICATION_JSON)
+        public void deleteOrganizationProfile(@PathParam("vcId")String profile) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+            employeeDatabaseServices.deleteEmpProfileByIDNReturn(profile);
 
         }
 }

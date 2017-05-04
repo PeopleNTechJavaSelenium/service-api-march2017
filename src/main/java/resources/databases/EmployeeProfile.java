@@ -42,6 +42,14 @@ public class EmployeeProfile {
         this.department = department;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getEmpName() {
         return empName;
     }

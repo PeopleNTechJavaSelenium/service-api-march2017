@@ -146,6 +146,48 @@ public class EmployeeDatabaseServices {
         return empList;
     }
 
+    public boolean updateEmpProfileByIDNReturn(EmployeeProfile profile)throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+
+        try{
+            mongoClient = connectDB.connectToRecommendedSSLAtlasMongoClient();
+            MongoDatabase mongoDatabase = mongoClient.getDatabase("dev");
+            MongoCollection mongoCollection = mongoDatabase.getCollection("profile");
+            Document empInfoDocument = documentEmployeeInfoData(profile);
+            Document filter = new Document("_id", profile.getId());
+            String id = filter.values().toString().replace("[","").replace("]","");
+            Document preparedDocument = new Document("empInfo", empInfoDocument);
+            mongoCollection.updateOne(new BasicDBObject("_id",new ObjectId(id)),new BasicDBObject("$set",new BasicDBObject(preparedDocument)));
+            mongoClient.close();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally {
+            if (mongoClient != null) {
+
+                mongoClient = null;
+            }
+        }
+        return true;
+    }
+
+    public void deleteEmpProfileByIDNReturn(String vcId)throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+
+        try{
+            mongoClient = connectDB.connectToRecommendedSSLAtlasMongoClient();
+            MongoDatabase mongoDatabase = mongoClient.getDatabase("dev");
+            MongoCollection mongoCollection = mongoDatabase.getCollection("profile");
+            BasicDBObject basicDBObject = new BasicDBObject("_id", new ObjectId(vcId));
+            mongoCollection.deleteOne(basicDBObject);
+            mongoClient.close();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally {
+            if (mongoClient != null) {
+
+                mongoClient = null;
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
     }
