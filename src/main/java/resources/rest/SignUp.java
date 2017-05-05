@@ -1,6 +1,7 @@
 package resources.rest;
 
 
+import resources.databases.AdminProfile;
 import resources.databases.AuthenticationDatabaseServices;
 import resources.databases.EmployeeProfile;
 
@@ -22,13 +23,13 @@ public class SignUp {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean postIt(EmployeeProfile employeeProfile)throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
-        return userDatabaseServices.userRegistration(employeeProfile);
+    public boolean postIt(AdminProfile adminProfile)throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+        return userDatabaseServices.adminRegistration(adminProfile);
     }
 
     @PUT
-    public String updateProfile(EmployeeProfile employeeProfile) {
-        return userDatabaseServices.updateAdminUserProfile(employeeProfile);
+    public String updateProfile(AdminProfile adminProfile) {
+        return userDatabaseServices.updateAdminUserProfile(adminProfile);
     }
 
 }

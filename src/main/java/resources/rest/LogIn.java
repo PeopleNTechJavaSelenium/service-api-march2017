@@ -1,5 +1,6 @@
 package resources.rest;
 
+import resources.databases.AdminProfile;
 import resources.databases.EmployeeProfile;
 import resources.databases.ProfileOperation;
 
@@ -22,8 +23,8 @@ public class LogIn {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean postIt(EmployeeProfile employeeProfile)throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
-        return profileOperation.verifyUser(employeeProfile);
+    public boolean postIt(AdminProfile adminProfile)throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+        return profileOperation.verifyUser(adminProfile);
     }
 
     @GET

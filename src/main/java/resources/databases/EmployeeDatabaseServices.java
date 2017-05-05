@@ -53,7 +53,6 @@ public class EmployeeDatabaseServices {
 
     public static Document documentEmployeeInfoData(EmployeeProfile profile){
         Document document = new Document().append(employeeFields.empEmail, profile.getEmpEmail())
-                .append(employeeFields.password, profile.getPassword())
                 .append(employeeFields.empName, profile.getEmpName())
                 .append(employeeFields.salary,profile.getSalary())
                 .append(employeeFields.department, profile.getDepartment());
@@ -81,11 +80,10 @@ public class EmployeeDatabaseServices {
                     Document empInfoDocument = (Document) document.get("empInfo");
                     String dbID = idDocument.toString();
                     String empEmail = (String)empInfoDocument.get("empEmail");
-                    String password = (String)empInfoDocument.get("password");
                     String empName = (String)empInfoDocument.get("empName");
                     String salary = (String)empInfoDocument.get("salary");
                     String department = (String)empInfoDocument.get("department");
-                    employeeProfile = new EmployeeProfile(dbID,empEmail,password,empName,salary,department);
+                    employeeProfile = new EmployeeProfile(dbID,empEmail,empName,salary,department);
                     empList.add(employeeProfile);
                 }
 
@@ -123,11 +121,10 @@ public class EmployeeDatabaseServices {
                     Document empInfoDocument = (Document) document.get("empInfo");
                     String dbID = idDocument.toString();
                     String empEmail = (String)empInfoDocument.get("empEmail");
-                    String password = (String)empInfoDocument.get("password");
                     String empName = (String)empInfoDocument.get("empName");
                     String salary = (String)empInfoDocument.get("salary");
                     String department = (String)empInfoDocument.get("department");
-                    employeeProfile = new EmployeeProfile(dbID,empEmail,password,empName,salary,department);
+                    employeeProfile = new EmployeeProfile(dbID,empEmail,empName,salary,department);
                     empList.add(employeeProfile);
                 }
 

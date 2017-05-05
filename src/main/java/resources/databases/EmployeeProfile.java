@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class EmployeeProfile {
 
-    public String id;
+    public String _id;
     public String empEmail;
     public String password;
     public String empName;
@@ -26,15 +26,15 @@ public class EmployeeProfile {
         this.password = password;
     }
 
-    public EmployeeProfile(String empEmail,String password,String empName, String salary, String department) {
-        this.empEmail = empEmail;
+    public EmployeeProfile(String _id,String empEmail,String empName, String salary, String department) {
+        this._id = _id;
         this.empEmail = empEmail;
         this.empName = empName;
         this.salary = salary;
         this.department = department;
     }
-    public EmployeeProfile(String id, String empEmail, String password, String empName, String salary, String department) {
-        this.id = id;
+    public EmployeeProfile(String _id, String empEmail, String password, String empName, String salary, String department) {
+        this._id = _id;
         this.empEmail = empEmail;
         this.password = password;
         this.empName = empName;
@@ -43,11 +43,11 @@ public class EmployeeProfile {
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this._id = id;
     }
 
     public String getEmpName() {

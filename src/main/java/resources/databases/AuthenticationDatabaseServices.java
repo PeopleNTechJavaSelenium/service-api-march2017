@@ -23,14 +23,14 @@ public class AuthenticationDatabaseServices {
         public List<String> userNameList = Arrays.asList("rahmanww@gmail.com");
 
 
-        public boolean userRegistration(EmployeeProfile user) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+        public boolean adminRegistration(AdminProfile user) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
             boolean message = false;
             try {
                 mongoClient = connectMongo.connectToRecommendedSSLAtlasMongoClient();
-                MongoDatabase mongoDatabase = mongoClient.getDatabase("ProfileDB");
-                MongoCollection<Document> collection = mongoDatabase.getCollection("admin_login");
-                if (userNameList.contains(user.getEmpEmail())) {
-                    Document document = new Document().append("empEmail", user.getEmpEmail()).append("password", user.getPassword());
+                MongoDatabase mongoDatabase = mongoClient.getDatabase("admin_profile");
+                MongoCollection<Document> collection = mongoDatabase.getCollection("login");
+                if (userNameList.contains(user.getEmail())) {
+                    Document document = new Document().append("email", user.getEmail()).append("password", user.getPassword());
                     collection.insertOne(document);
                     message = true;
                 } else {
@@ -48,13 +48,13 @@ public class AuthenticationDatabaseServices {
             return message;
         }
 
-        public String updateAdminUserProfile(EmployeeProfile user) {
-            String profile = user.getEmpEmail();
+        public String updateAdminUserProfile(AdminProfile user) {
+            String profile = user.getEmail();
             try {
                 mongoClient = connectMongo.connectToRecommendedSSLAtlasMongoClient();
-                mongoDatabase = mongoClient.getDatabase("AdminProfileDB");
-                MongoCollection<Document> collection = mongoDatabase.getCollection("admin_login");
-                Document document = new Document().append("empEmail", user.getEmpEmail()).append("password", user.getPassword());
+                mongoDatabase = mongoClient.getDatabase("admin_profile");
+                MongoCollection<Document> collection = mongoDatabase.getCollection("login");
+                Document document = new Document().append("email", user.getEmail()).append("password", user.getPassword());
                 mongoClient.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -69,14 +69,14 @@ public class AuthenticationDatabaseServices {
         }
 
 
-        public EmployeeProfile register(String email) {
-            EmployeeProfile user = new EmployeeProfile();
+        public AdminProfile register(String email) {
+            AdminProfile user = new AdminProfile();
 
             try {
                 mongoClient = connectMongo.connectToRecommendedSSLAtlasMongoClient();
-                MongoDatabase mongoDatabase = mongoClient.getDatabase("AdminProfileDB");
-                MongoCollection<Document> collection = mongoDatabase.getCollection("admin_login");
-                Document document = new Document().append("empEmail", user.getEmpEmail()).append("password", user.getPassword());
+                MongoDatabase mongoDatabase = mongoClient.getDatabase("admin_profile");
+                MongoCollection<Document> collection = mongoDatabase.getCollection("login");
+                Document document = new Document().append("email", user.getEmail()).append("password", user.getPassword());
                 collection.insertOne(document);
                 mongoClient.close();
             } catch (Exception ex) {
@@ -98,13 +98,13 @@ public class AuthenticationDatabaseServices {
             try {
 
                 mongoClient = connectMongo.connectToRecommendedSSLAtlasMongoClient();
-                MongoDatabase mongoDatabase = mongoClient.getDatabase("AdminProfileDB");
-                MongoCollection<Document> collection = mongoDatabase.getCollection("admin_login");
+                MongoDatabase mongoDatabase = mongoClient.getDatabase("admin_profile");
+                MongoCollection<Document> collection = mongoDatabase.getCollection("login");
                 BasicDBObject basicDBObject = new BasicDBObject();
-                basicDBObject.put("empEmail", email);
+                basicDBObject.put("email", email);
                 FindIterable<Document> iterable = collection.find(basicDBObject);
                 for (Document doc : iterable) {
-                    String emailPosted = (String) doc.get("empEmail");
+                    String emailPosted = (String) doc.get("email");
                     String passwordPosted = (String) doc.get("password");
                     user.setEmpEmail(emailPosted);
                     user.setPassword(passwordPosted);
