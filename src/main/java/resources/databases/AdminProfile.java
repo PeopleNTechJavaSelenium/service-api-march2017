@@ -1,8 +1,15 @@
 package resources.databases;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by mrahman on 5/5/17.
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AdminProfile {
 
     public String email;
